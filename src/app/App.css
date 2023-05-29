@@ -1,0 +1,25 @@
+.Logo {
+    background: #27374D;
+    text-align: center;
+}
+
+.Sankey-Diagram {
+    padding-top: 15px;
+    justify-content: center;
+    display: flex;
+}
+
+.Action-Buttons {
+    margin: 15px;
+    padding-top: 15px;
+    justify-content: center;
+    display: flex;
+}
+
+.View-Data {
+    padding-top: 15px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 30px;
+    justify-content: left;
+}
