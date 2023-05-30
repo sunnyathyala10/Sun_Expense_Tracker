@@ -11,7 +11,6 @@ import ViewData from "./ViewData";
 import {
   CashTypes,
   ColorCodes,
-  DispatchActions,
   Common,
   Fields,
 } from "../common/constants";
@@ -51,16 +50,16 @@ function App() {
     if (newCashType && newCashAmount) {
       if (cashType === CashTypes.Income) {
         dispatch({
-          type: DispatchActions.Add,
+          type: "add",
           payload: [newCashType, "Income", newCashAmount],
         });
       } else {
         dispatch({
-          type: DispatchActions.Add,
+          type: "add",
           payload: ["Income", newCashType, newCashAmount],
         });
         dispatch({
-          type: DispatchActions.Add,
+          type: "add",
           payload: [newCashType, "Expense", newCashAmount],
         });
       }
@@ -72,9 +71,8 @@ function App() {
   };
 
   const deleteFromDataHandler = (index) => {
-    console.log(index);
     dispatch({
-      type: DispatchActions.Delete,
+      type: "delete",
       payload: { index: index },
     });
   };

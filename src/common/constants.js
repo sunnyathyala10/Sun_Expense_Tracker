@@ -11,11 +11,6 @@ export const CashTypes = {
   Expense: "expense",
 };
 
-export const DispatchActions = {
-  Add: "add",
-  Delete: "delete",
-};
-
 export const Common = {
   EmptyString: "",
     Space: " "

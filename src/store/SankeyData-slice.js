@@ -4,10 +4,10 @@ import { DispatchActions } from "../common/constants";
 const initialData = { dataArr: getSankeyData };
 
 const SankeyData = (state = initialData, action) => {
-  if (action.type === DispatchActions.add) {
+  if (action.type == "add") {
     return { dataArr: [...state.dataArr, action.payload] };
   }
-  if (action.type === DispatchActions.delete) {
+  if (action.type == "delete") {
     state.dataArr.splice(action.payload.index, 1);
     return { dataArr: [...state.dataArr] };
   }
