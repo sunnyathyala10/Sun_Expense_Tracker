@@ -1,5 +1,4 @@
 import getSankeyData from "../api/getSankeyData";
-import { DispatchActions } from "../common/constants";
 
 const initialData = { dataArr: getSankeyData };
 

@@ -12,9 +12,12 @@ import {
   tableCellClasses,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { ColorCodes, Fields } from "../common/constants";
+import { ColorCodes } from "../common/constants";
+import { useTranslation } from "react-i18next";
 
 const ViewData = (props) => {
+  const { t } = useTranslation();
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: ColorCodes.LogoBackground,
@@ -36,10 +39,14 @@ const ViewData = (props) => {
       <Table>
         <TableHead>
           <TableRow>
-            <StyledTableCell>{Fields.From}</StyledTableCell>
-            <StyledTableCell>{Fields.To}</StyledTableCell>
-            <StyledTableCell align="right">{Fields.Amount}</StyledTableCell>
-            <StyledTableCell align="right">{Fields.Action}</StyledTableCell>
+            <StyledTableCell>{t("fields.From")}</StyledTableCell>
+            <StyledTableCell>{t("fields.To")}</StyledTableCell>
+            <StyledTableCell align="right">
+              {t("fields.Amount")}
+            </StyledTableCell>
+            <StyledTableCell align="right">
+              {t("fields.Action")}
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

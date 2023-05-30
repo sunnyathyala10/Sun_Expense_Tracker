@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import centime from "../resources/centime.png";
@@ -8,14 +8,12 @@ import SankeyChart from "../components/SankeyChart";
 import { Button, Stack, TextField } from "@mui/material";
 import Modal from "react-modal";
 import ViewData from "./ViewData";
-import {
-  CashTypes,
-  ColorCodes,
-  Common,
-  Fields,
-} from "../common/constants";
+import { CashTypes, ColorCodes, Common } from "../common/constants";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t, i18n } = useTranslation();
+
   const [cashType, setCashType] = useState(Common.EmptyString);
   const [newCashType, setNewCashType] = useState(Common.EmptyString);
   const [newCashAmount, setNewCashAmount] = useState();
@@ -25,6 +23,12 @@ function App() {
   const sankeyData = useSelector((state) => state.dataArr);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const lng = navigator.language;
+    console.log(lng);
+    i18n.changeLanguage(lng);
+  }, [navigator.language]);
 
   const modalStyle = {
     content: {
@@ -106,14 +110,14 @@ function App() {
             style={{ background: ColorCodes.ButtonBackground }}
             onClick={showIncomeHandler}
           >
-            {Fields.AddIncome}
+            {t("fields.AddIncome")}
           </Button>
           <Button
             variant="contained"
             style={{ background: ColorCodes.ButtonBackground }}
             onClick={showExpenseHandler}
           >
-            {Fields.AddExpense}
+            {t("fields.AddExpense")}
           </Button>
         </Stack>
       </div>
@@ -125,8 +129,8 @@ function App() {
         <TextField
           label={
             cashType === CashTypes.Income
-              ? Fields.IncomeType
-              : Fields.ExpenseType
+              ? t("fields.IncomeType")
+              : t("fields.ExpenseType")
           }
           style={{
             margin: 5,
@@ -137,7 +141,7 @@ function App() {
           }}
         />
         <TextField
-          label={Fields.Amount}
+          label={t("fields.Amount")}
           style={{
             margin: 5,
             marginBottom: 15,
@@ -155,7 +159,9 @@ function App() {
           }}
           onClick={addToDataHandler}
         >
-          {cashType === CashTypes.Income ? Fields.AddIncome : Fields.AddExpense}
+          {cashType === CashTypes.Income
+            ? t("fields.AddIncome")
+            : t("fields.AddExpense")}
         </Button>
       </Modal>
       <div className="View-Data">
@@ -164,8 +170,8 @@ function App() {
           onClick={detailedDataHandler}
         >
           {showDetailedData
-            ? icons.arrowTriD + Common.Space + Fields.HideDetailedData
-            : icons.arrowTriR + Common.Space + Fields.ViewDetailedData}
+            ? icons.arrowTriD + Common.Space + t("fields.HideDetailedData")
+            : icons.arrowTriR + Common.Space + t("fields.ViewDetailedData")}
         </p>
         {showDetailedData ? (
           <ViewData
