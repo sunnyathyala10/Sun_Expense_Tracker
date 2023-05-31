@@ -13,6 +13,10 @@ const fr_FR = () => {
         To: "Pour",
         Action: "Action",
       },
+      errorMessages: {
+        enterAmountNumber:
+          "Veuillez entrer un nombre dans le champ du montant.",
+      },
     },
   };
 };

@@ -13,6 +13,9 @@ const es_ES = () => {
         To: "A",
         Action: "Acción",
       },
+      errorMessages: {
+        enterAmountNumber: "Introduzca un número en el campo de importe.",
+      },
     },
   };
 };

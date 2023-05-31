@@ -26,7 +26,6 @@ function App() {
 
   useEffect(() => {
     const lng = navigator.language;
-    console.log(lng);
     i18n.changeLanguage(lng);
   }, [navigator.language]);
 
@@ -125,6 +124,10 @@ function App() {
         isOpen={showModal}
         shouldCloseOnOverlayClick={true}
         style={modalStyle}
+        ariaHideApp={false}
+        onRequestClose={() => {
+          setShowModal(false);
+        }}
       >
         <TextField
           label={
@@ -147,6 +150,12 @@ function App() {
             marginBottom: 15,
           }}
           onBlur={(event) => {
+            if (isNaN(event.target.value)) {
+              alert(t("errorMessages.enterAmountNumber"));
+              event.target.value = Common.EmptyString;
+              event.target.focus();
+              return;
+            }
             setNewCashAmount(event.target.value);
           }}
         />

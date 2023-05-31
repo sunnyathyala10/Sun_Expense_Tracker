@@ -13,6 +13,9 @@ const en_US = () => {
         To: "To",
         Action: "Action",
       },
+      errorMessages: {
+        enterAmountNumber: "Please enter a number in amount field.",
+      },
     },
   };
 };
