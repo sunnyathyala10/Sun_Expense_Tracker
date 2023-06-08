@@ -12,9 +12,13 @@ const es_ES = () => {
         From: "De",
         To: "A",
         Action: "Acción",
+        SelectLanguage: "Seleccione el idioma",
       },
       errorMessages: {
         enterAmountNumber: "Introduzca un número en el campo de importe.",
+      },
+      messages: {
+        viewPage: "Ver página en",
       },
     },
   };

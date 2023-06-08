@@ -12,9 +12,13 @@ const en_US = () => {
         From: "From",
         To: "To",
         Action: "Action",
+        SelectLanguage: "Select Language",
       },
       errorMessages: {
         enterAmountNumber: "Please enter a number in amount field.",
+      },
+      messages: {
+        viewPage: "View page in",
       },
     },
   };

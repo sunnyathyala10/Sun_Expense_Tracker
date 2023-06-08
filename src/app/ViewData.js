@@ -44,7 +44,7 @@ const ViewData = (props) => {
             <StyledTableCell align="right">
               {t("fields.Amount")}
             </StyledTableCell>
-            <StyledTableCell align="right">
+            <StyledTableCell align="center">
               {t("fields.Action")}
             </StyledTableCell>
           </TableRow>
@@ -59,7 +59,11 @@ const ViewData = (props) => {
                 </StyledTableCell>
                 <StyledTableCell>{row[1]}</StyledTableCell>
                 <StyledTableCell align="right">{row[2]}</StyledTableCell>
-                <TableCell align="right">
+                <TableCell align="center">
+                  <Button onClick={() => props.editDataHandler(index)}>
+                    {icons.edit}
+                  </Button>
+                  |
                   <Button onClick={() => props.deleteHandler(index)}>
                     {icons.cancel}
                   </Button>

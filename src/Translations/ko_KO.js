@@ -12,9 +12,13 @@ const en_US = () => {
         From: "에서",
         To: "에게",
         Action: "행동",
+        SelectLanguage: "언어 선택",
       },
       errorMessages: {
         enterAmountNumber: "금액란에 숫자를 입력해주세요.",
+      },
+      messages: {
+        viewPage: "페이지 보기",
       },
     },
   };

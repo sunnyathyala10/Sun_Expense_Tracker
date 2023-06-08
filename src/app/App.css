@@ -3,10 +3,19 @@
     text-align: center;
 }
 
+.Select-Language-Container {
+    float: right;
+    display: flex;
+}
+
+.Select-Language {
+    padding: 10px;
+}
+
 .Sankey-Diagram {
-    padding-top: 15px;
     justify-content: center;
     display: flex;
+    width: 100%;
 }
 
 .Action-Buttons {

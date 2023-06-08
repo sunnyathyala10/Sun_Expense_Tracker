@@ -12,10 +12,14 @@ const fr_FR = () => {
         From: "Depuis",
         To: "Pour",
         Action: "Action",
+        SelectLanguage: "Choisir la langue",
       },
       errorMessages: {
         enterAmountNumber:
           "Veuillez entrer un nombre dans le champ du montant.",
+      },
+      messages: {
+        viewPage: "Afficher la page dans",
       },
     },
   };

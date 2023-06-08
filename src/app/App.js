@@ -10,6 +10,8 @@ import Modal from "react-modal";
 import ViewData from "./ViewData";
 import { CashTypes, ColorCodes, Common } from "../common/constants";
 import { useTranslation } from "react-i18next";
+import languageOptions from "../api/getLanguageOptions";
+import MySelect from "../components/Select";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -27,7 +29,7 @@ function App() {
   useEffect(() => {
     const lng = navigator.language;
     i18n.changeLanguage(lng);
-  }, [navigator.language]);
+  }, []);
 
   const modalStyle = {
     content: {
@@ -58,12 +60,12 @@ function App() {
         });
       } else {
         dispatch({
-          type: "add",
-          payload: ["Income", newCashType, newCashAmount],
+          type: "update",
+          payload: ["Income", "Expense", newCashAmount],
         });
         dispatch({
           type: "add",
-          payload: [newCashType, "Expense", newCashAmount],
+          payload: ["Expense", newCashType, newCashAmount],
         });
       }
       setNewCashType(Common.EmptyString);
@@ -84,11 +86,24 @@ function App() {
     setShowDetailedData(!showDetailedData);
   };
 
+  const languageChangeHandler = (item) => {
+    i18n.changeLanguage(item.value);
+  };
+
   return (
     <>
       <header className="Logo">
         <img src={centime} alt="centime" width={150} />
       </header>
+      <div className="Select-Language-Container">
+        <p>{t("messages.viewPage")}</p>
+        <MySelect
+          options={languageOptions}
+          className="Select-Language"
+          onChangeHandler={languageChangeHandler}
+          placeholder={t("fields.SelectLanguage")}
+        />
+      </div>
       <div className="Sankey-Diagram">
         <SankeyChart
           data={sankeyData}
