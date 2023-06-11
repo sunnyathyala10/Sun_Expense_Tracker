@@ -8,10 +8,11 @@ import {
   screen,
   act,
 } from "@testing-library/react";
-import SankeyData from "../store/SankeyData-slice";
 
-import App from "./App";
+import SankeyData from "../../store/SankeyData-slice";
+import App from "../../app/App";
 import userEvent from "@testing-library/user-event";
+import selectEvent from "react-select-event";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => {
@@ -42,6 +43,21 @@ describe("App", () => {
     expect(screen.getByRole("img")).toBeInTheDocument();
   });
 
+  it("should have a Select Language field in the document", () => {
+    renderWithRedux(<App />);
+    expect(screen.getByText("fields.SelectLanguage")).toBeInTheDocument();
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+  });
+
+  it("should have selected language on the screen, when selected.", async () => {
+    renderWithRedux(<App />);
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      selectEvent.select(screen.getByRole("combobox"), "Spanish");
+    });
+    expect(screen.getByText("Spanish")).toBeInTheDocument();
+  });
+
   it("should have a Add Income button in the document", () => {
     renderWithRedux(<App />);
     expect(screen.getByText("fields.AddIncome")).toBeInTheDocument();
@@ -63,6 +79,90 @@ describe("App", () => {
     fireEvent.click(screen.getByText("▶ fields.ViewDetailedData"));
     fireEvent.click(screen.getAllByRole("button")[4]);
     expect(screen.getByRole("table")).toBeInTheDocument();
+  });
+
+  it("should open a modal on click of edit button", () => {
+    renderWithRedux(<App />);
+    fireEvent.click(screen.getByText("▶ fields.ViewDetailedData"));
+    fireEvent.click(screen.getAllByRole("button")[5]);
+    fireEvent.click(screen.getAllByRole("button")[6]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByText("fields.EditExpense")).toBeInTheDocument();
+  });
+
+  it("should trigger the alert when amount value is not a number in Edit Modal", async () => {
+    renderWithRedux(<App />);
+    window.alert = jest.fn();
+
+    const user = userEvent.setup();
+    fireEvent.click(screen.getByText("▶ fields.ViewDetailedData"));
+    fireEvent.click(screen.getAllByRole("button")[6]);
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      const amount = screen.getAllByRole("textbox")[1];
+      await user.type(amount, "abcd");
+      fireEvent.blur(amount);
+    });
+
+    expect(window.alert).toHaveBeenCalledWith(
+      "errorMessages.enterAmountNumber"
+    );
+  });
+
+  it("should submit the data after clicking the Edit Income button", async () => {
+    renderWithRedux(<App />);
+    const user = userEvent.setup();
+    fireEvent.click(screen.getByText("▶ fields.ViewDetailedData"));
+    fireEvent.click(screen.getAllByRole("button")[4]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      const amount = screen.getAllByRole("textbox")[1];
+      await user.type(amount, "2500");
+      fireEvent.blur(amount);
+    });
+
+    const addExpenseBtn = screen.getByText("fields.EditIncome");
+    fireEvent.click(addExpenseBtn);
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("should submit the data after clicking the Edit Expense button", async () => {
+    renderWithRedux(<App />);
+    const user = userEvent.setup();
+    fireEvent.click(screen.getByText("▶ fields.ViewDetailedData"));
+    fireEvent.click(screen.getAllByRole("button")[6]);
+
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      const amount = screen.getAllByRole("textbox")[1];
+      await user.type(amount, "2500");
+      fireEvent.blur(amount);
+    });
+
+    const addExpenseBtn = screen.getByText("fields.EditExpense");
+    fireEvent.click(addExpenseBtn);
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("should close the Edit modal on overlay click", async () => {
+    renderWithRedux(<App />);
+    fireEvent.click(screen.getByText("▶ fields.ViewDetailedData"));
+    fireEvent.click(screen.getAllByRole("button")[6]);
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const overlayElement = screen.getByRole("dialog").parentElement;
+    fireEvent.click(overlayElement);
+    fireEvent.click(screen.getAllByRole("button")[7]);
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
   it("should have modal component when AddIncome button is clicked", () => {

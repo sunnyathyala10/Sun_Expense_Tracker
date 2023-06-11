@@ -9,4 +9,4 @@ const getSankeyData = () => {
   ];
 };
 
-export default getSankeyData();
+export default getSankeyData;

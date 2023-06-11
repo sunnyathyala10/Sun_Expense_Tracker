@@ -1,6 +1,6 @@
 import getSankeyData from "../api/getSankeyData";
 
-const initialData = { dataArr: getSankeyData };
+const initialData = { dataArr: getSankeyData() };
 
 const getArrayIndex = (arr, from, to) => {
   return arr.findIndex((value) => {

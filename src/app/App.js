@@ -9,7 +9,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import ViewData from "./ViewData";
 import { CashTypes, ColorCodes, Common } from "../common/constants";
 import { useTranslation } from "react-i18next";
-import languageOptions from "../api/getLanguageOptions";
+import getLanguageOptions from "../api/getLanguageOptions";
 import MySelect from "../components/Select/Select";
 import ModalComp from "../components/Modal/ModalComp";
 
@@ -131,7 +131,7 @@ function App() {
       <div className="Select-Language-Container">
         <p>{t("messages.viewPage")}</p>
         <MySelect
-          options={languageOptions}
+          options={getLanguageOptions()}
           className="Select-Language"
           onChangeHandler={languageChangeHandler}
           placeholder={t("fields.SelectLanguage")}
