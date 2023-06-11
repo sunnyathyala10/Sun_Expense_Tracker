@@ -34,7 +34,7 @@ const ViewData = (props) => {
     },
   }));
 
-  const actionButton = (from, to, index) => {
+  const actionButton = (from, to, amount, index) => {
     if (from == "Income" && to == "Expense") {
       return (
         <>
@@ -55,7 +55,7 @@ const ViewData = (props) => {
 
     return (
       <>
-        <Button onClick={() => props.editHandler(index)}>
+        <Button onClick={() => props.editHandler(from, to, amount)}>
           {icons.edit}
         </Button>
         |
@@ -92,7 +92,7 @@ const ViewData = (props) => {
                 <StyledTableCell>{row[1]}</StyledTableCell>
                 <StyledTableCell align="right">{row[2]}</StyledTableCell>
                 <TableCell align="center">
-                  {actionButton(row[0], row[1], index)}
+                  {actionButton(row[0], row[1], row[2], index)}
                 </TableCell>
               </StyledTableRow>
             );

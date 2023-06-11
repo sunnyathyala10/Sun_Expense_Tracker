@@ -4,6 +4,8 @@ const es_ES = () => {
       fields: {
         AddIncome: "Añadir ingresos",
         AddExpense: "Agregar gasto",
+        EditIncome: "Editar ingresos",
+        EditExpense: "Editar gasto",
         IncomeType: "Tipo de ingresos",
         ExpenseType: "Tipo de gasto",
         Amount: "Cantidad",

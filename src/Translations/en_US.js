@@ -4,6 +4,8 @@ const en_US = () => {
       fields: {
         AddIncome: "Add Income",
         AddExpense: "Add Expense",
+        EditIncome: "Edit Income",
+        EditExpense: "Edit Expense",
         IncomeType: "Income Type",
         ExpenseType: "Expense Type",
         Amount: "Amount",

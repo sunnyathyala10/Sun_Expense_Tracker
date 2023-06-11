@@ -26,6 +26,34 @@ const SankeyData = (state = initialData, action) => {
       return { dataArr: [...state.dataArr, action.payload] };
     }
   }
+  if (action.type == "edit") {
+    const entryIndex = getArrayIndex(
+      state.dataArr,
+      action.payload[0],
+      action.payload[1]
+    );
+    if (action.payload[0] == "Expense") {
+      const previousExpenseAmt = state.dataArr[entryIndex][2];
+      const incomeExpenseIndex = getArrayIndex(
+        state.dataArr,
+        "Income",
+        "Expense"
+      );
+      state.dataArr[incomeExpenseIndex] = [
+        "Income",
+        "Expense",
+        parseInt(state.dataArr[incomeExpenseIndex][2]) -
+          parseInt(previousExpenseAmt) +
+          parseInt(action.payload[2]),
+      ];
+    }
+    state.dataArr[entryIndex] = [
+      action.payload[0],
+      action.payload[1],
+      action.payload[2],
+    ];
+    return { dataArr: [...state.dataArr] };
+  }
   if (action.type == "delete") {
     if (state.dataArr[action.payload.index][0] == "Expense") {
       const expenseAmount = state.dataArr[action.payload.index][2];

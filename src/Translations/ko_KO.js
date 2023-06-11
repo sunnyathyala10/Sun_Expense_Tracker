@@ -4,6 +4,8 @@ const en_US = () => {
       fields: {
         AddIncome: "소득 추가",
         AddExpense: "비용 추가",
+        EditIncome: "소득 편집",
+        EditExpense: "비용 수정",
         IncomeType: "소득 유형",
         ExpenseType: "비용 유형",
         Amount: "양",

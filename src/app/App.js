@@ -19,7 +19,8 @@ function App() {
   const [cashType, setCashType] = useState(Common.EmptyString);
   const [newCashType, setNewCashType] = useState(Common.EmptyString);
   const [newCashAmount, setNewCashAmount] = useState();
-  const [showModal, setShowModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [showDetailedData, setShowDetailedData] = useState(false);
 
   const sankeyData = useSelector((state) => state.dataArr);
@@ -33,12 +34,12 @@ function App() {
 
   const showIncomeHandler = () => {
     setCashType(CashTypes.Income);
-    setShowModal(true);
+    setShowAddModal(true);
   };
 
   const showExpenseHandler = () => {
     setCashType(CashTypes.Expense);
-    setShowModal(true);
+    setShowAddModal(true);
   };
 
   const addToDataHandler = () => {
@@ -62,7 +63,27 @@ function App() {
       setNewCashAmount();
     }
     setCashType(Common.EmptyString);
-    setShowModal(false);
+    setShowAddModal(false);
+  };
+
+  const editDataHandler = () => {
+    if (newCashType && newCashAmount) {
+      if (cashType === CashTypes.Income) {
+        dispatch({
+          type: "edit",
+          payload: [newCashType, "Income", newCashAmount],
+        });
+      } else {
+        dispatch({
+          type: "edit",
+          payload: ["Expense", newCashType, newCashAmount],
+        });
+      }
+      setNewCashType(Common.EmptyString);
+      setNewCashAmount();
+    }
+    setCashType(Common.EmptyString);
+    setShowEditModal(false);
   };
 
   const deleteFromDataHandler = (index) => {
@@ -72,11 +93,16 @@ function App() {
     });
   };
 
-  const editDataHandler = (index) => {
-    dispatch({
-      type: "edit",
-      payload: { index: index },
-    });
+  const editClickHandler = (from, to, amount) => {
+    setShowEditModal(true);
+    if (from == "Expense") {
+      setCashType(CashTypes.Expense);
+      setNewCashType(to);
+    } else if (to == "Income") {
+      setCashType(CashTypes.Income);
+      setNewCashType(from);
+    }
+    setNewCashAmount(amount);
   };
 
   const detailedDataHandler = () => {
@@ -85,6 +111,16 @@ function App() {
 
   const languageChangeHandler = (item) => {
     i18n.changeLanguage(item.value);
+  };
+
+  const amountValidator = (event) => {
+    if (isNaN(event.target.value)) {
+      alert(t("errorMessages.enterAmountNumber"));
+      event.target.value = Common.EmptyString;
+      event.target.focus();
+      return;
+    }
+    setNewCashAmount(event.target.value);
   };
 
   return (
@@ -133,9 +169,9 @@ function App() {
         </Stack>
       </div>
       <ModalComp
-        showModal={showModal}
+        showModal={showAddModal}
         modalCloseHandler={() => {
-          setShowModal(false);
+          setShowAddModal(false);
         }}
       >
         <TextField
@@ -152,15 +188,7 @@ function App() {
         <TextField
           label={t("fields.Amount")}
           className="Text-Field"
-          onBlur={(event) => {
-            if (isNaN(event.target.value)) {
-              alert(t("errorMessages.enterAmountNumber"));
-              event.target.value = Common.EmptyString;
-              event.target.focus();
-              return;
-            }
-            setNewCashAmount(event.target.value);
-          }}
+          onBlur={(event) => amountValidator(event)}
         />
         <br />
         <Button
@@ -173,6 +201,40 @@ function App() {
             : t("fields.AddExpense")}
         </Button>
       </ModalComp>
+      <ModalComp
+        showModal={showEditModal}
+        modalCloseHandler={() => {
+          setShowEditModal(false);
+        }}
+      >
+        <TextField
+          label={
+            cashType === CashTypes.Income
+              ? t("fields.IncomeType")
+              : t("fields.ExpenseType")
+          }
+          className="Text-Field"
+          disabled
+          defaultValue={newCashType}
+          variant="filled"
+        />
+        <TextField
+          label={t("fields.Amount")}
+          className="Text-Field"
+          defaultValue={newCashAmount}
+          onBlur={(event) => amountValidator(event)}
+        />
+        <br />
+        <Button
+          variant="contained"
+          className="Button-Style"
+          onClick={editDataHandler}
+        >
+          {cashType === CashTypes.Income
+            ? t("fields.EditIncome")
+            : t("fields.EditExpense")}
+        </Button>
+      </ModalComp>
       <div className="View-Data">
         <p onClick={detailedDataHandler}>
           {showDetailedData
@@ -183,7 +245,7 @@ function App() {
           <ViewData
             data={sankeyData}
             deleteHandler={deleteFromDataHandler}
-            editHandler={editDataHandler}
+            editHandler={editClickHandler}
           ></ViewData>
         ) : (
           <br />
