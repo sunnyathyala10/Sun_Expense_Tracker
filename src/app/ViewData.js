@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import icons from "glyphicons";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import {
   Table,
   TableBody,
@@ -34,6 +34,38 @@ const ViewData = (props) => {
     },
   }));
 
+  const actionButton = (from, to, index) => {
+    if (from == "Income" && to == "Expense") {
+      return (
+        <>
+          <Tooltip title={t("errorMessages.editNotAllowed")}>
+            <span>
+              <Button disabled>{icons.edit}</Button>
+            </span>
+          </Tooltip>
+          |
+          <Tooltip title={t("errorMessages.deleteNotAllowed")}>
+            <span>
+              <Button disabled>{icons.cancel}</Button>
+            </span>
+          </Tooltip>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Button onClick={() => props.editHandler(index)}>
+          {icons.edit}
+        </Button>
+        |
+        <Button onClick={() => props.deleteHandler(index)}>
+          {icons.cancel}
+        </Button>
+      </>
+    );
+  };
+
   return (
     <TableContainer>
       <Table>
@@ -60,13 +92,7 @@ const ViewData = (props) => {
                 <StyledTableCell>{row[1]}</StyledTableCell>
                 <StyledTableCell align="right">{row[2]}</StyledTableCell>
                 <TableCell align="center">
-                  <Button onClick={() => props.editDataHandler(index)}>
-                    {icons.edit}
-                  </Button>
-                  |
-                  <Button onClick={() => props.deleteHandler(index)}>
-                    {icons.cancel}
-                  </Button>
+                  {actionButton(row[0], row[1], index)}
                 </TableCell>
               </StyledTableRow>
             );

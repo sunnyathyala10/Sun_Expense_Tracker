@@ -16,6 +16,10 @@ const es_ES = () => {
       },
       errorMessages: {
         enterAmountNumber: "Introduzca un número en el campo de importe.",
+        editNotAllowed:
+          "No se permite editar este nivel ya que esto invalida los datos. Edite amablemente las respectivas categorías individuales.",
+        deleteNotAllowed:
+          "No se permite eliminar este nivel ya que esto invalida los datos. Por favor, elimine las respectivas categorías individuales.",
       },
       messages: {
         viewPage: "Ver página en",

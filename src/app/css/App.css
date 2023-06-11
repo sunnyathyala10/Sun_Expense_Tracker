@@ -1,0 +1,49 @@
+.Logo {
+  background: #27374d;
+  text-align: center;
+}
+
+.Select-Language-Container {
+  float: right;
+  display: flex;
+}
+
+.Select-Language {
+  padding: 10px;
+}
+
+.Sankey-Diagram {
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+
+.Action-Buttons {
+  margin: 15px;
+  padding-top: 15px;
+  justify-content: center;
+  display: flex;
+}
+
+.View-Data {
+  padding-top: 15px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 30px;
+  justify-content: left;
+}
+
+.Text-Field {
+  margin: 5px !important;
+  margin-bottom: 15px !important;
+}
+
+p {
+  color: #17376a;
+}
+
+.Button-Style {
+  margin-left: 5px !important;
+  margin-right: 30px !important;
+  background: #17376a !important;
+}

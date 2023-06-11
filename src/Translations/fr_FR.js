@@ -17,6 +17,10 @@ const fr_FR = () => {
       errorMessages: {
         enterAmountNumber:
           "Veuillez entrer un nombre dans le champ du montant.",
+        editNotAllowed:
+          "La modification de ce niveau n'est pas autorisée car cela invalide les données. Veuillez modifier les catégories individuelles respectives.",
+        deleteNotAllowed:
+          "La suppression de ce niveau n'est pas autorisée car cela invalide les données. Veuillez supprimer les catégories individuelles respectives.",
       },
       messages: {
         viewPage: "Afficher la page dans",

@@ -16,6 +16,10 @@ const en_US = () => {
       },
       errorMessages: {
         enterAmountNumber: "금액란에 숫자를 입력해주세요.",
+        editNotAllowed:
+          "데이터가 무효화되므로 이 수준을 편집하는 것은 허용되지 않습니다. 각 개별 카테고리를 수정하십시오.",
+        deleteNotAllowed:
+          "이 수준을 삭제하면 데이터가 무효화되므로 삭제할 수 없습니다. 각 개별 카테고리를 삭제하십시오.",
       },
       messages: {
         viewPage: "페이지 보기",

@@ -16,6 +16,10 @@ const en_US = () => {
       },
       errorMessages: {
         enterAmountNumber: "Please enter a number in amount field.",
+        editNotAllowed:
+          "Editing this level is not allowed as this invalidates the data. Kindly edit the respective individual categories.",
+        deleteNotAllowed:
+          "Deleting this level is not allowed as this invalidates the data. Kindly delete the respective individual categories.",
       },
       messages: {
         viewPage: "View page in",

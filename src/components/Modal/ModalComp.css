@@ -1,0 +1,13 @@
+.modalStyle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 8px;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 20px;
+}

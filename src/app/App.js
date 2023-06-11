@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import centime from "../resources/centime.png";
-import "./App.css";
+import "./css/App.css";
 import icons from "glyphicons";
-import SankeyChart from "../components/SankeyChart";
+import SankeyChart from "../components/SankeyChart/SankeyChart";
 import { Button, Stack, TextField } from "@mui/material";
-import Modal from "react-modal";
 import ViewData from "./ViewData";
 import { CashTypes, ColorCodes, Common } from "../common/constants";
 import { useTranslation } from "react-i18next";
 import languageOptions from "../api/getLanguageOptions";
-import MySelect from "../components/Select";
+import MySelect from "../components/Select/Select";
+import ModalComp from "../components/Modal/ModalComp";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -31,16 +31,6 @@ function App() {
     i18n.changeLanguage(lng);
   }, []);
 
-  const modalStyle = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
   const showIncomeHandler = () => {
     setCashType(CashTypes.Income);
     setShowModal(true);
@@ -60,7 +50,7 @@ function App() {
         });
       } else {
         dispatch({
-          type: "update",
+          type: "add",
           payload: ["Income", "Expense", newCashAmount],
         });
         dispatch({
@@ -78,6 +68,13 @@ function App() {
   const deleteFromDataHandler = (index) => {
     dispatch({
       type: "delete",
+      payload: { index: index },
+    });
+  };
+
+  const editDataHandler = (index) => {
+    dispatch({
+      type: "edit",
       payload: { index: index },
     });
   };
@@ -121,26 +118,23 @@ function App() {
         <Stack spacing={10} direction="row">
           <Button
             variant="contained"
-            style={{ background: ColorCodes.ButtonBackground }}
+            className="Button-Style"
             onClick={showIncomeHandler}
           >
             {t("fields.AddIncome")}
           </Button>
           <Button
             variant="contained"
-            style={{ background: ColorCodes.ButtonBackground }}
+            className="Button-Style"
             onClick={showExpenseHandler}
           >
             {t("fields.AddExpense")}
           </Button>
         </Stack>
       </div>
-      <Modal
-        isOpen={showModal}
-        shouldCloseOnOverlayClick={true}
-        style={modalStyle}
-        ariaHideApp={false}
-        onRequestClose={() => {
+      <ModalComp
+        showModal={showModal}
+        modalCloseHandler={() => {
           setShowModal(false);
         }}
       >
@@ -150,20 +144,14 @@ function App() {
               ? t("fields.IncomeType")
               : t("fields.ExpenseType")
           }
-          style={{
-            margin: 5,
-            marginBottom: 15,
-          }}
+          className="Text-Field"
           onBlur={(event) => {
             setNewCashType(event.target.value);
           }}
         />
         <TextField
           label={t("fields.Amount")}
-          style={{
-            margin: 5,
-            marginBottom: 15,
-          }}
+          className="Text-Field"
           onBlur={(event) => {
             if (isNaN(event.target.value)) {
               alert(t("errorMessages.enterAmountNumber"));
@@ -177,22 +165,16 @@ function App() {
         <br />
         <Button
           variant="contained"
-          style={{
-            padding: 10,
-            margin: 5,
-          }}
+          className="Button-Style"
           onClick={addToDataHandler}
         >
           {cashType === CashTypes.Income
             ? t("fields.AddIncome")
             : t("fields.AddExpense")}
         </Button>
-      </Modal>
+      </ModalComp>
       <div className="View-Data">
-        <p
-          style={{ color: ColorCodes.ButtonBackground }}
-          onClick={detailedDataHandler}
-        >
+        <p onClick={detailedDataHandler}>
           {showDetailedData
             ? icons.arrowTriD + Common.Space + t("fields.HideDetailedData")
             : icons.arrowTriR + Common.Space + t("fields.ViewDetailedData")}
@@ -201,6 +183,7 @@ function App() {
           <ViewData
             data={sankeyData}
             deleteHandler={deleteFromDataHandler}
+            editHandler={editDataHandler}
           ></ViewData>
         ) : (
           <br />
