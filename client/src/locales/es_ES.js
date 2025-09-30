@@ -23,9 +23,12 @@ const es_ES = () => {
           "No se permite editar este nivel ya que esto invalida los datos. Edite amablemente las respectivas categorías individuales.",
         deleteNotAllowed:
           "No se permite eliminar este nivel ya que esto invalida los datos. Por favor, elimine las respectivas categorías individuales.",
+        frequentRequests: "Se detectaron solicitudes frecuentes.",
       },
       messages: {
         viewPage: "Ver página en",
+        expenseAdded: "¡Gastos actualizados!",
+        incomeAdded: "¡Ingresos actualizados!",
       },
     },
   };

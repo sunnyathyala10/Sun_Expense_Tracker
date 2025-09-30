@@ -24,9 +24,12 @@ const fr_FR = () => {
           "La modification de ce niveau n'est pas autorisée car cela invalide les données. Veuillez modifier les catégories individuelles respectives.",
         deleteNotAllowed:
           "La suppression de ce niveau n'est pas autorisée car cela invalide les données. Veuillez supprimer les catégories individuelles respectives.",
+        frequentRequests: "Demandes fréquentes détectées.",
       },
       messages: {
         viewPage: "Afficher la page dans",
+        expenseAdded: "Dépenses mises à jour !",
+        incomeAdded: "Revenu mis à jour !",
       },
     },
   };

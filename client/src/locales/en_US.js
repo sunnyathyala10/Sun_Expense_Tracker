@@ -23,9 +23,12 @@ const en_US = () => {
           "Editing this level is not allowed as this invalidates the data. Kindly edit the respective individual categories.",
         deleteNotAllowed:
           "Deleting this level is not allowed as this invalidates the data. Kindly delete the respective individual categories.",
+        frequentRequests: "Frequent requests detected.",
       },
       messages: {
         viewPage: "View page in",
+        expenseAdded: "Expense Updated!",
+        incomeAdded: "Income Updated!",
       },
     },
   };

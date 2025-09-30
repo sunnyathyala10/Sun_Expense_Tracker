@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import icons from "glyphicons";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 
-import "./css/App.css";
+import "./App.css";
 import SankeyChart from "../components/SankeyChart/SankeyChart";
 import { Button, Stack, TextField } from "@mui/material";
 import ViewData from "./ViewData";
@@ -62,12 +62,11 @@ function App() {
           payload: mappedData,
         });
       }
-      console.log(expensesData);
       setExpensesData(expensesData);
     } catch (e) {
       console.log(e);
       if (e.response && e.response.status == 429) {
-        toast.error("Frequent requests detected.");
+        toast.error(t("errorMessages.frequentRequests"));
       }
     }
   };
@@ -135,6 +134,8 @@ function App() {
           payload: [newCashType, "Income", newCashAmount],
         });
       }
+
+      toast.success(t("messages.incomeAdded"));
     } catch (e) {}
   };
 
@@ -207,6 +208,8 @@ function App() {
         type: "edit",
         payload: ["Income", "Expense", newBaseExpenseAmount],
       });
+
+      toast.success(t("messages.expenseAdded"));
     } catch (e) {}
   };
 
@@ -420,6 +423,7 @@ function App() {
           <br />
         )}
       </div>
+      <Toaster position="top-left" reverseOrder={false} />
     </>
   );
 }

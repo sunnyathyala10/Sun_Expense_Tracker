@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Sun Expense Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sun Expense Tracker is a full-stack (MERN) web application for tracking and visualizing your income and expenses. It features a Sankey diagram for intuitive flow visualization, multi-language support, and persistent storage using MongoDB.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Add, edit, and delete** income and expense entries
+- **Sankey Chart** visualization using [react-google-charts](https://github.com/RakanNimer/react-google-charts)
+- **Multi-language support** (i18n)
+- **Persistent storage** with MongoDB
+- **Responsive UI** built with React and Material-UI
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend:** React, Material-UI, react-google-charts, i18next
+- **Backend:** Node.js, Express.js, Mongoose
+- **Database:** MongoDB (Atlas)
+- **Other:** Upstash Redis (optional for caching/rate limiting)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- Node.js (v16+ recommended)
+- npm or yarn
+- MongoDB Atlas account (or local MongoDB)
+- (Optional) Upstash Redis account
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. **Clone the repository:**
+   git clone https://github.com/yourusername/Sun_Expense_Tracker.git
+   cd Sun_Expense_Tracker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install dependencies:**
+   cd client
+   npm install
+   cd ../server
+   npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Configure environment variables:**
+   Create a `.env` file in the `server` directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   MONGO_URI=your_mongodb_connection_string
+   PORT=5001
+   UPSTASH_REDIS_REST_URL=your_upstash_redis_url
+   UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running the Application
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Start the backend server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+cd server
+npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The backend will run on [http://localhost:5001](http://localhost:5001).
 
-## Learn More
+#### Start the frontend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+cd client
+npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The frontend will run on [http://localhost:3000](http://localhost:3000).
 
-### Code Splitting
+### Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Add income or expense entries using the provided buttons.
+- Visualize your cash flow in the Sankey diagram.
+- Switch languages using the language selector.
+- View, edit, or delete detailed data in the table below the chart.
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Project Structure
 
-### Making a Progressive Web App
+Sun_Expense_Tracker/
+├── client/      # React frontend
+├── server/      # Express backend
+├── README.md
+└── .gitignore
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+### API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `GET /api/expenses` — Get all expenses
+- `POST /api/expenses` — Add a new expense
+- `PUT /api/expenses/:id` — Update an expense
+- `DELETE /api/expenses/:id` — Delete an expense
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Customization
 
-### `npm run build` fails to minify
+- To add more languages, update the i18n configuration in the client.
+- To change chart options, edit the SankeyChart component props.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+*Built by SunnyAthyala*
