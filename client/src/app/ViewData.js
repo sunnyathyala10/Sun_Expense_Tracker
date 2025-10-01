@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import icons from "glyphicons";
 import { Button, Tooltip } from "@mui/material";
 import {
@@ -15,24 +14,24 @@ import { styled } from "@mui/material/styles";
 import { ColorCodes } from "../common/constants";
 import { useTranslation } from "react-i18next";
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: ColorCodes.HeaderBackground,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: ColorCodes.RowHighlighter,
+  },
+}));
+
 const ViewData = (props) => {
   const { t } = useTranslation();
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: ColorCodes.HeaderBackground,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: ColorCodes.RowHighlighter,
-    },
-  }));
 
   const actionButton = (from, to, amount, index) => {
     if (from == "Income" && to == "Expense") {

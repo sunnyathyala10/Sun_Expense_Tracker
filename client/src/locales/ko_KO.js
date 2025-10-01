@@ -2,7 +2,8 @@ const en_US = () => {
   return {
     translation: {
       fields: {
-        AddIncome: "비용 추적기",
+        AppHeader: "비용 추적기",
+        AddIncome: "소득 추가",
         AddExpense: "비용 추가",
         EditIncome: "소득 편집",
         EditExpense: "비용 수정",

@@ -1,4 +1,4 @@
-import { rateLimit } from "../config";
+import { rateLimit } from "../config/index.js";
 
 const rateLimiter = async (req, res, next) => {
   try {

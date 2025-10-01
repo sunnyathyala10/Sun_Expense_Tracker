@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import { expenseRouter } from "./routes";
-import { rateLimiter } from "./middleware";
+import { expenseRouter } from "./routes/index.js";
+import { rateLimiter } from "./middleware/index.js";
 
 dotenv.config();
 
