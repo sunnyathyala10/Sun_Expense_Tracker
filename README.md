@@ -92,6 +92,10 @@ Sun_Expense_Tracker/
 - To change chart options, edit the SankeyChart component props.
 
 
+### Future Scope
+
+- To add User Authentication, so that expenses can be tracked per user.
+- To Add date filters and provide users ability to pull data based on the filters.
 
 
 
