@@ -29,6 +29,7 @@ function App() {
     showEditModal,
     setShowEditModal,
     showDetailedData,
+    expensesData,
     showIncomeModal,
     showExpenseModal,
     handleSave,
@@ -37,7 +38,11 @@ function App() {
     handleToggleDetail,
     handleAmountBlur,
   } = useExpenses({
-    i18n, t, CashTypes, Common, dispatch,
+    i18n,
+    t,
+    CashTypes,
+    Common,
+    dispatch,
   });
 
   const languageChangeHandler = (item) => {
@@ -59,17 +64,21 @@ function App() {
         />
       </div>
       <div className="Sankey-Diagram">
-        <SankeyChart
-          data={sankeyData}
-          options={{
-            sankey: {
-              link: { color: { fill: ColorCodes.LinkHighlighter } },
-              node: {
-                label: { color: ColorCodes.Black },
+        {expensesData.size === 0 ? (
+          <br />
+        ) : (
+          <SankeyChart
+            data={sankeyData}
+            options={{
+              sankey: {
+                link: { color: { fill: ColorCodes.LinkHighlighter } },
+                node: {
+                  label: { color: ColorCodes.Black },
+                },
               },
-            },
-          }}
-        />
+            }}
+          />
+        )}
       </div>
       <div className="Action-Buttons">
         <Stack spacing={10} direction="row">
