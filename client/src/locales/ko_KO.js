@@ -29,6 +29,7 @@ const en_US = () => {
         viewPage: "페이지 보기",
         expenseAdded: "비용이 업데이트되었습니다!",
         incomeAdded: "소득이 업데이트되었습니다!",
+        entryDeleted: "항목이 삭제되었습니다!",
       },
     },
   };

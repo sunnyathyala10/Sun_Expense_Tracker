@@ -199,7 +199,11 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
         await api.delete(`/expenses/${expenseId}`);
         expensesData.delete(mapKey);
         dispatch({ type: "delete", payload: [from, to] });
-      } catch {}
+
+        toast.success(t("messages.entryDeleted"));
+      } catch(e) {
+        console.error(e);
+      }
     },
     [expensesData, dispatch],
   );

@@ -29,6 +29,7 @@ const en_US = () => {
         viewPage: "View page in",
         expenseAdded: "Expense Updated!",
         incomeAdded: "Income Updated!",
+        entryDeleted: "Entry Deleted!",
       },
     },
   };

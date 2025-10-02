@@ -29,6 +29,7 @@ const es_ES = () => {
         viewPage: "Ver página en",
         expenseAdded: "¡Gastos actualizados!",
         incomeAdded: "¡Ingresos actualizados!",
+        entryDeleted: "¡Entrada eliminada!",
       },
     },
   };

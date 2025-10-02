@@ -30,6 +30,7 @@ const fr_FR = () => {
         viewPage: "Afficher la page dans",
         expenseAdded: "Dépenses mises à jour !",
         incomeAdded: "Revenu mis à jour !",
+        entryDeleted: "Entrée supprimée !",
       },
     },
   };
