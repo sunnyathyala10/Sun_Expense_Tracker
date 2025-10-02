@@ -20,9 +20,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 app.use(express.json());
-app.use(rateLimiter);
 
-app.use("/api/expenses", expenseRouter);
+app.use("/api/expenses", rateLimiter, expenseRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client", "build")));
