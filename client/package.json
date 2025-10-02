@@ -26,6 +26,7 @@
     "react-responsive-modal": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.3",
+    "sun_expense_tracker": "file:..",
     "web-vitals": "^2.1.4"
   },
   "jest": {

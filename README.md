@@ -15,7 +15,7 @@ Sun Expense Tracker is a full-stack (MERN) web application for tracking and visu
 - **Frontend:** React, Material-UI, react-google-charts, i18next
 - **Backend:** Node.js, Express.js, Mongoose
 - **Database:** MongoDB (Atlas)
-- **Other:** Upstash Redis (optional for caching/rate limiting)
+- **Other:** Upstash Redis (for rate limiting)
 
 ## Prerequisites
 

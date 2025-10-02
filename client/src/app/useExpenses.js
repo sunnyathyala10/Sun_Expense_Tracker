@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
+import api from "../lib/axios";
 import { toast } from "react-hot-toast";
 
 export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
@@ -13,18 +13,15 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
 
   const fetchExpenses = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5001/api/expenses");
+      const res = await api.get("/expenses");
       const expData = new Map();
 
       if (res.data.length === 0) {
-        const baseInstance = await axios.post(
-          "http://localhost:5001/api/expenses",
-          {
-            fromExpense: "Income",
-            toExpense: "Expense",
-            expenseAmount: 0,
-          },
-        );
+        const baseInstance = await api.post("/expenses", {
+          fromExpense: "Income",
+          toExpense: "Expense",
+          expenseAmount: 0,
+        });
         expData.set(`income$expense`, baseInstance.data.expense);
         dispatch({ type: "load", payload: ["Income", "Expense", 0] });
       } else {
@@ -63,28 +60,22 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
             ? parseInt(newCashAmount)
             : parseInt(item.expenseAmount) + parseInt(newCashAmount);
 
-          const updated = await axios.put(
-            `http://localhost:5001/api/expenses/${expenseId}`,
-            {
-              fromExpense: newCashType,
-              toExpense: "Income",
-              expenseAmount: newExpenseAmount,
-            },
-          );
+          const updated = await api.put(`/expenses/${expenseId}`, {
+            fromExpense: newCashType,
+            toExpense: "Income",
+            expenseAmount: newExpenseAmount,
+          });
           expensesData.set(mapKey, updated.data.expense);
           dispatch({
             type: "edit",
             payload: [newCashType, "Income", newExpenseAmount],
           });
         } else {
-          const created = await axios.post(
-            "http://localhost:5001/api/expenses",
-            {
-              fromExpense: newCashType,
-              toExpense: "Income",
-              expenseAmount: newCashAmount,
-            },
-          );
+          const created = await api.post("/expenses", {
+            fromExpense: newCashType,
+            toExpense: "Income",
+            expenseAmount: newCashAmount,
+          });
           expensesData.set(mapKey, created.data.expense);
           dispatch({
             type: "add",
@@ -122,28 +113,22 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
               parseInt(item.expenseAmount);
           }
 
-          const updated = await axios.put(
-            `http://localhost:5001/api/expenses/${expenseId}`,
-            {
-              fromExpense: "Expense",
-              toExpense: newCashType,
-              expenseAmount: newExpenseAmount,
-            },
-          );
+          const updated = await api.put(`/expenses/${expenseId}`, {
+            fromExpense: "Expense",
+            toExpense: newCashType,
+            expenseAmount: newExpenseAmount,
+          });
           expensesData.set(mapKey, updated.data.expense);
           dispatch({
             type: "edit",
             payload: ["Expense", newCashType, newExpenseAmount],
           });
         } else {
-          const created = await axios.post(
-            "http://localhost:5001/api/expenses",
-            {
-              fromExpense: "Expense",
-              toExpense: newCashType,
-              expenseAmount: newCashAmount,
-            },
-          );
+          const created = await api.post("/expenses", {
+            fromExpense: "Expense",
+            toExpense: newCashType,
+            expenseAmount: newCashAmount,
+          });
           expensesData.set(mapKey, created.data.expense);
           dispatch({
             type: "add",
@@ -151,14 +136,11 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
           });
         }
 
-        const updatedBase = await axios.put(
-          `http://localhost:5001/api/expenses/${baseExpense._id}`,
-          {
-            fromExpense: "Income",
-            toExpense: "Expense",
-            expenseAmount: newBaseExpenseAmount,
-          },
-        );
+        const updatedBase = await api.put(`/expenses/${baseExpense._id}`, {
+          fromExpense: "Income",
+          toExpense: "Expense",
+          expenseAmount: newBaseExpenseAmount,
+        });
         expensesData.set(`income$expense`, updatedBase.data.expense);
         dispatch({
           type: "edit",
@@ -202,14 +184,11 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
           let newBaseExpenseAmount =
             parseInt(baseExpense.expenseAmount) - parseInt(amount);
 
-          const updatedBase = await axios.put(
-            `http://localhost:5001/api/expenses/${baseExpense._id}`,
-            {
-              fromExpense: "Income",
-              toExpense: "Expense",
-              expenseAmount: newBaseExpenseAmount,
-            },
-          );
+          const updatedBase = await api.put(`/expenses/${baseExpense._id}`, {
+            fromExpense: "Income",
+            toExpense: "Expense",
+            expenseAmount: newBaseExpenseAmount,
+          });
           expensesData.set(`income$expense`, updatedBase.data.expense);
           dispatch({
             type: "edit",
@@ -217,7 +196,7 @@ export default function useExpenses({ i18n, t, CashTypes, Common, dispatch }) {
           });
         }
 
-        await axios.delete(`http://localhost:5001/api/expenses/${expenseId}`);
+        await api.delete(`/expenses/${expenseId}`);
         expensesData.delete(mapKey);
         dispatch({ type: "delete", payload: [from, to] });
       } catch {}

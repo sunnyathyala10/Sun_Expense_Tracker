@@ -1,0 +1,16 @@
+{
+  "name": "sun_expense_tracker",
+  "version": "1.0.0",
+  "description": "Sun Expense Tracker is a full-stack (MERN) web application for tracking and visualizing your income and expenses. It features a Sankey diagram for intuitive flow visualization, multi-language support, and persistent storage using MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client",
+    "start": "npm run start --prefix server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "path-to-regexp": "8.3.0"
+  }
+}
